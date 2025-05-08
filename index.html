@@ -4,7 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agile Anarchy Scrum Board</title>
+  <title>Agile Anarchy</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
   <style>
     body {
       margin: 0;
@@ -96,5 +99,15 @@
       ev.target.closest('.column').appendChild(document.getElementById(data));
     }
   </script>
+  <button id="openManifestoBtn">View Agile Anarchy Manifesto</button>
+  <div id="manifestoPopup" class="popup">
+        <div class="popup-content">
+            <span id="closePopupBtn" class="close-btn">&times;</span>
+            <h2>Agile Anarchy Manifesto</h2>
+            <p>We, the players of Agile Anarchy, embrace chaos, unpredictability, and disruption...</p>
+            <p>In this game, roles are fluid, allegiances are temporary, and the only rule is to outwit and outlast the rest...</p>
+        </div>
+    </div>
+   <script src="script.js"></script>
 </body>
 </html>
