@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agile Anarchy Scrum Board</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1a1a1a;
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      font-size: 2rem;
+      margin: 20px;
+      color: #facc15;
+      font-weight: bold;
+    }
+    .board {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .column {
+      background: #2d2d2d;
+      border-radius: 1rem;
+      padding: 10px;
+      width: 250px;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    }
+    .column h2 {
+      text-align: center;
+      color: #e0e0e0;
+    }
+    .card {
+      background: linear-gradient(135deg, #2f855a, #68d391);
+      border-radius: 1rem;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: grab;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: transform 0.1s ease;
+    }
+    .card:active {
+      cursor: grabbing;
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+  <header>Agile Anarchy Scrum Board</header>
+  <div class="board">
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>Backlog</h2>
+      <div class="card" draggable="true" ondragstart="drag(event)" id="task1">Design QA Role</div>
+      <div class="card" draggable="true" ondragstart="drag(event)" id="task2">Set Up Preorders</div>
+    </div>
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>In Progress</h2>
+      <div class="card" draggable="true" ondragstart="drag(event)" id="task3">Card Balancing</div>
+    </div>
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>Playtesting</h2>
+    </div>
+    <div class="column" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <h2>Done</h2>
+    </div>
+  </div>
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      ev.target.closest('.column').appendChild(document.getElementById(data));
+    }
+  </script>
+</body>
+</html>
