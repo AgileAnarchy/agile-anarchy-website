@@ -7,19 +7,34 @@
   <link rel="stylesheet" href="dev.css">
 </head>
 <body>
-  <div id="gameRoom">
+  <div class="container">
     <h1>Welcome to the Game Room</h1>
-    <div id="roomInfo">
-      <p id="roomCode"></p>
-      <p id="roleInfo"></p>
-      <div id="qrCodeContainer">
-        <h2>Share this QR code with players:</h2>
-        <div id="qrCode"></div>
-      </div>
+
+    <!-- Room code and role information will be dynamically inserted here -->
+    <div id="roomDetails">
+      <p id="roomCode">Room Code: </p>
+      <p id="roleInfo">Role: </p>
+    </div>
+
+    <!-- If the user is the Game Master (GM), they will see additional instructions -->
+    <div id="gmInstructions" style="display: none;">
+      <h2>You are the Game Master!</h2>
+      <p>As the Game Master, you will be able to start the game and see the list of players joining the game.</p>
+    </div>
+
+    <!-- If the user is a player, they will wait for the game to start -->
+    <div id="playerWaiting" style="display: none;">
+      <h2>Waiting for the Game Master to start the game...</h2>
+      <p>You are in the lobby. Please wait for the Game Master to start the game.</p>
+    </div>
+    
+    <!-- Placeholder for player list (only visible to the Game Master) -->
+    <div id="playerList" style="display: none;">
+      <h3>Players in the Game:</h3>
+      <ul id="players"></ul>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script src="dev.js"></script>
 </body>
 </html>
