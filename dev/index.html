@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Agile Anarchy – Game Room</title>
-  <link rel="stylesheet" href="dev.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agile Anarchy - Game Setup</title>
+  <link rel="stylesheet" href="dev.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>Create a New Game</h1>
+    <button id="createRoomBtn">Create Room</button>
+  </div>
 
-  <h1>Create Game Room</h1>
-
-  <button id="createRoomBtn">Create Room</button>
-
-  <div id="roomDisplay" style="margin-top: 20px;"></div>
-  <div id="qrcode" style="margin-top: 20px;"></div>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="dev.js"></script>
-  
+  <script type="module" src="dev.js"></script>
 </body>
 </html>
