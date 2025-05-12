@@ -1,11 +1,24 @@
-function generateRoomCode() {
-  const prefix = "AN";
-  const randomDigits = Math.floor(1000 + Math.random() * 9000);
-  return `${prefix}${randomDigits}`;
-}
-
+// Handle "Create Game" button click
 document.getElementById("createGameBtn").addEventListener("click", () => {
-  const roomCode = generateRoomCode();
+  // Generate a unique room code (e.g., AN1234)
+  const roomCode = `AN${Math.floor(Math.random() * 9000) + 1000}`;
+
+  // Store room code in localStorage
   localStorage.setItem("roomCode", roomCode);
-  window.location.href = `room.html?code=${roomCode}`;
+
+  // Redirect the Game Master to the generated room
+  window.location.href = `gm_room.html?code=${roomCode}`;
+});
+
+// Handle "Join Game" button click
+document.getElementById("joinGameBtn").addEventListener("click", () => {
+  // Ask the player to enter the room code
+  const roomCode = prompt("Enter the room code:");
+
+  if (roomCode) {
+    // Redirect the player to the game room page with the entered room code
+    window.location.href = `room.html?code=${roomCode}`;
+  } else {
+    alert("Please enter a valid room code!");
+  }
 });
