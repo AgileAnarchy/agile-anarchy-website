@@ -35,12 +35,5 @@ window.onload = function() {
     // Show the room code and GM role info
     document.getElementById('roomCode').innerText = `Room Code: ${roomCode}`;
     document.getElementById('roleInfo').innerText = "You are the Game Master!";
-    
-    // Generate the QR code
-    const qrCodeData = `${window.location.origin}/dev/${roomCode}`; // QR code that players will scan
-    QRCode.toCanvas(document.getElementById('qrCode'), qrCodeData, function(error) {
-      if (error) console.error(error);
-      console.log("QR code generated successfully!");
-    });
   }
 };
