@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Game Room</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agile Anarchy - Game Room</title>
   <link rel="stylesheet" href="dev.css">
 </head>
 <body>
-  <h1>Game Room</h1>
-  <p>Room Code: <span id="roomCodeDisplay"></span></p>
-  <canvas id="qrCode"></canvas>
+  <div id="roomContainer">
+    <h1>Welcome to the Game Room</h1>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-  <script src="room.js"></script>
+    <!-- Room Code Display -->
+    <div id="roomCodeDisplay"></div>
+
+    <!-- GM Section: See Players & Manage Room -->
+    <div id="gmSection" style="display:none;">
+      <h2>Game Master - Room Management</h2>
+      <ul id="playersList">
+        <!-- Players will be listed here -->
+      </ul>
+      <button id="startGameBtn">Start Game</button>
+    </div>
+
+    <!-- Player Section: Enter Display Name & Join Lobby -->
+    <div id="playerSection" style="display:none;">
+      <h2>Enter your Display Name</h2>
+      <input type="text" id="displayNameInput" placeholder="Enter display name" />
+      <button id="joinLobbyBtn">Join Lobby</button>
+    </div>
+
+    <!-- Lobby Section (Visible after Joining) -->
+    <div id="lobbySection" style="display:none;">
+      <h2>Waiting in Lobby...</h2>
+      <p>Once the Game Master starts the game, you will be notified.</p>
+    </div>
+  </div>
+
+  <script src="dev.js"></script>
 </body>
 </html>
