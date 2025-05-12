@@ -6,8 +6,8 @@ document.getElementById("createGameBtn").addEventListener("click", () => {
   // Store room code in localStorage
   localStorage.setItem("roomCode", roomCode);
 
-  // Redirect the Game Master to the generated room
-  window.location.href = `gm_room.html?code=${roomCode}`;
+  // Redirect the Game Master to the generated room (GM will be able to see all players)
+  window.location.href = `room.html?code=${roomCode}&role=gm`;
 });
 
 // Handle "Join Game" button click
@@ -17,7 +17,7 @@ document.getElementById("joinGameBtn").addEventListener("click", () => {
 
   if (roomCode) {
     // Redirect the player to the game room page with the entered room code
-    window.location.href = `room.html?code=${roomCode}`;
+    window.location.href = `room.html?code=${roomCode}&role=player`;
   } else {
     alert("Please enter a valid room code!");
   }
