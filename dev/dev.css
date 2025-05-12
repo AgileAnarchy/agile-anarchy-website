@@ -1,0 +1,32 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #0f0f0f;
+  color: #f0f0f0;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+}
+
+.button-group {
+  margin-top: 40px;
+}
+
+button {
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ff0055;
+  color: white;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #ff3366;
+}
