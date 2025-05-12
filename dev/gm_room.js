@@ -1,56 +1,71 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+// gm_room.js
 
-// Initialize Supabase
-const supabase = createClient(
-  'https://uyqogqhwxqvjsjgywplp.supabase.co',  // Replace with your Supabase URL
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5cW9ncWh3eHF2anNqZ3l3cGxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwNjU5NDksImV4cCI6MjA2MjY0MTk0OX0.Dj-aauw8eQbtoNtxkmY9xXmWwJlwjwZZ3eRS28RxHCg'                 // Replace with your Supabase public API key
-);
+// Get the room code from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const roomCode = urlParams.get("code");
 
-// Get room info from localStorage
-const roomCode = localStorage.getItem("roomCode");
-const roomId = localStorage.getItem("roomId");
+// References to HTML elements
+const roomCodeEl = document.getElementById("room-code");
+const playerListEl = document.getElementById("player-list");
 
-// Show the room code
-document.getElementById("roomCodeDisplay").textContent = `Room Code: ${roomCode}`;
+async function fetchRoomAndPlayers() {
+  // Fetch the game room details
+  const { data: rooms, error: roomError } = await supabase
+    .from("game_rooms")
+    .select("id, code, status")
+    .eq("code", roomCode)
+    .single();
 
-// Generate QR code for joining
-new QRCode(document.getElementById("qrCode"), {
-  text: `${window.location.origin}/dev/join.html?room=${roomCode}`,
-  width: 160,
-  height: 160,
-});
-
-// Function to update player list
-async function fetchPlayers() {
-  const { data, error } = await supabase
-    .from("players")
-    .select("*")
-    .eq("room_id", roomId);
-
-  if (error) {
-    console.error("Failed to fetch players:", error);
+  if (roomError || !rooms) {
+    console.error("Room not found:", roomError);
+    alert("Game room not found.");
     return;
   }
 
-  const list = document.getElementById("playerList");
-  list.innerHTML = ""; // Clear old list
+  const roomId = rooms.id;
+  roomCodeEl.textContent = roomCode;
 
-  data.forEach(player => {
+  // Fetch players in the room
+  const { data: players, error: playerError } = await supabase
+    .from("players")
+    .select("id, name, role, is_eliminated")
+    .eq("game_room_id", roomId);
+
+  if (playerError) {
+    console.error("Error fetching players:", playerError);
+    return;
+  }
+
+  updatePlayerList(players);
+
+  // Subscribe to player changes in real-time
+  supabase
+    .channel("players-room-" + roomId)
+    .on(
+      "postgres_changes",
+      { event: "*", schema: "public", table: "players", filter: `game_room_id=eq.${roomId}` },
+      (payload) => {
+        console.log("Change in players table:", payload);
+        fetchRoomAndPlayers(); // Refresh player list on insert/delete/update
+      }
+    )
+    .subscribe();
+}
+
+function updatePlayerList(players) {
+  playerListEl.innerHTML = "";
+
+  if (players.length === 0) {
+    playerListEl.innerHTML = "<li>No players yet.</li>";
+    return;
+  }
+
+  players.forEach((player) => {
     const li = document.createElement("li");
-    li.textContent = player.name || `Player ${player.id}`;
-    list.appendChild(li);
+    li.textContent = `${player.name || "Unnamed Player"} - ${player.role || "Unassigned"}${player.is_eliminated ? " (Eliminated)" : ""}`;
+    playerListEl.appendChild(li);
   });
 }
 
-// Real-time listener for new players
-supabase
-  .channel('room-' + roomId)
-  .on(
-    'postgres_changes',
-    { event: 'INSERT', schema: 'public', table: 'players', filter: `room_id=eq.${roomId}` },
-    fetchPlayers
-  )
-  .subscribe();
-
-// Initial load
-fetchPlayers();
+// Run on page load
+fetchRoomAndPlayers();
