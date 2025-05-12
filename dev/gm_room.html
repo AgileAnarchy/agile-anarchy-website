@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Game Master Room</title>
+  <title>Agile Anarchy - Game Room</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Agile Anarchy: Game Room</h1>
-    <p><strong>Room Code:</strong> <span id="roomCode"></span></p>
-    <img id="qrCode" alt="QR Code to join" />
-    
-    <h2>Players Joined:</h2>
-    <ul id="playerList"></ul>
+  <main class="container">
+    <h1>Agile Anarchy</h1>
+    <h2 id="roomCodeDisplay">Room Code: ...</h2>
 
-    <button id="startGameBtn">Start Game</button>
-  </div>
+    <div id="qrCode" class="qr-container"></div>
 
+    <section>
+      <h3>Players Joined:</h3>
+      <ul id="playerList" class="player-list"></ul>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script type="module" src="gm_room.js"></script>
 </body>
 </html>
