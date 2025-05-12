@@ -22,3 +22,25 @@ document.getElementById("joinGameBtn").addEventListener("click", () => {
     alert("Please enter a valid room code!");
   }
 });
+
+// When the Game Master enters the room page
+window.onload = function() {
+  // Retrieve room code and role from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const roomCode = urlParams.get('code');
+  const role = urlParams.get('role');
+
+  // If role is GM, proceed to display the room info
+  if (role === 'gm') {
+    // Show the room code and GM role info
+    document.getElementById('roomCode').innerText = `Room Code: ${roomCode}`;
+    document.getElementById('roleInfo').innerText = "You are the Game Master!";
+    
+    // Generate the QR code
+    const qrCodeData = `${window.location.origin}/dev/${roomCode}`; // QR code that players will scan
+    QRCode.toCanvas(document.getElementById('qrCode'), qrCodeData, function(error) {
+      if (error) console.error(error);
+      console.log("QR code generated successfully!");
+    });
+  }
+};
