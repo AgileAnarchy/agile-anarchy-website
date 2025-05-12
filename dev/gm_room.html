@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game Master Room</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Agile Anarchy: Game Room</h1>
+    <p><strong>Room Code:</strong> <span id="roomCode"></span></p>
+    <img id="qrCode" alt="QR Code to join" />
+    
+    <h2>Players Joined:</h2>
+    <ul id="playerList"></ul>
+
+    <button id="startGameBtn">Start Game</button>
+  </div>
+
+  <script type="module" src="gm_room.js"></script>
+</body>
+</html>
