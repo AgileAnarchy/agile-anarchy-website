@@ -1,6 +1,22 @@
 document.getElementById("createRoomBtn").addEventListener("click", () => {
   const roomCode = generateRoomCode();
+  const roomURL = `https://agile-anarchy.com/dev/room/${roomCode}`;
+
+  // Display room code
   document.getElementById("roomDisplay").innerHTML = `Room Code: <strong>${roomCode}</strong>`;
+
+  // Clear any previous QR code
+  document.getElementById("qrcode").innerHTML = "";
+
+  // Generate QR code
+  new QRCode(document.getElementById("qrcode"), {
+    text: roomURL,
+    width: 200,
+    height: 200,
+    colorDark: "#ffffff",
+    colorLight: "#111111",
+    correctLevel: QRCode.CorrectLevel.H
+  });
 });
 
 function generateRoomCode() {
