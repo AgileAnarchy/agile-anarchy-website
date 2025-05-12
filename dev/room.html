@@ -7,35 +7,19 @@
   <link rel="stylesheet" href="dev.css">
 </head>
 <body>
-  <div id="roomContainer">
+  <div id="gameRoom">
     <h1>Welcome to the Game Room</h1>
-
-    <!-- Room Code Display -->
-    <div id="roomCodeDisplay"></div>
-
-    <!-- GM Section: See Players & Manage Room -->
-    <div id="gmSection" style="display:none;">
-      <h2>Game Master - Room Management</h2>
-      <ul id="playersList">
-        <!-- Players will be listed here -->
-      </ul>
-      <button id="startGameBtn">Start Game</button>
-    </div>
-
-    <!-- Player Section: Enter Display Name & Join Lobby -->
-    <div id="playerSection" style="display:none;">
-      <h2>Enter your Display Name</h2>
-      <input type="text" id="displayNameInput" placeholder="Enter display name" />
-      <button id="joinLobbyBtn">Join Lobby</button>
-    </div>
-
-    <!-- Lobby Section (Visible after Joining) -->
-    <div id="lobbySection" style="display:none;">
-      <h2>Waiting in Lobby...</h2>
-      <p>Once the Game Master starts the game, you will be notified.</p>
+    <div id="roomInfo">
+      <p id="roomCode"></p>
+      <p id="roleInfo"></p>
+      <div id="qrCodeContainer">
+        <h2>Share this QR code with players:</h2>
+        <div id="qrCode"></div>
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script src="dev.js"></script>
 </body>
 </html>
